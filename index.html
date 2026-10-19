@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JelajahiKonoha - Jelajahi Keajaiban Nusantara</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigoPrimary: '#4F46E5',
+                        indigoDark: '#3730A3',
+                        amberGold: '#F59E0B',
+                        coralAccent: '#F43F5E',
+                        darkSlate: '#0F172A',
+                        darkCard: '#1E293B',
+                        softBg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8FAFC;
+            color: #334155;
+        }
+
+        @keyframes naikturun {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                /* Posisi awal dan akhir */
+            }
+
+            50% {
+                transform: translateY(-20px);
+                /* Posisi saat melayang ke atas */
+            }
+        }
+
+        .font-serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(79, 70, 229, 0.45)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+
+        .glass-dark {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-white transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer"
+                    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30">
+                        N
+                    </div>
+                    <span class="font-serif-heading text-2xl font-bold tracking-wider text-white">
+                        Konoha<span class="text-amber-400">Uy</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#beranda" class="text-amber-400 hover:text-amber-300 transition-colors">Beranda</a>
+                    <a href="#destinasi" class="text-slate-300 hover:text-white transition-colors">Destinasi</a>
+                    <a href="#promo" class="text-slate-300 hover:text-white transition-colors">Paket Tour</a>
+                    <a href="#peta" class="text-slate-300 hover:text-white transition-colors">Peta Wilayah</a>
+                    <a href="#kontak" class="text-slate-300 hover:text-white transition-colors">Kontak</a>
+                </div>
+
+                <!-- CTA & Favorites Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button onclick="openWishlistModal()"
+                        class="relative p-2.5 text-slate-300 hover:text-amber-400 transition-colors rounded-xl bg-slate-800/80 border border-slate-700">
+                        <i class="fa-solid font-bold fa-heart"></i>
+                        <span id="wishlist-badge"
+                            class="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                    </button>
+                    <a href="#kontak"
+                        class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-semibold shadow-lg shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5">
+                        Pesan Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-3">
+                    <button onclick="openWishlistModal()" class="p-2 text-slate-300 hover:text-amber-400">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3 text-sm">
+            <a href="#beranda" class="block py-2 text-amber-400 font-medium">Beranda</a>
+            <a href="#destinasi" class="block py-2 text-slate-300 hover:text-white">Destinasi</a>
+            <a href="#promo" class="block py-2 text-slate-300 hover:text-white">Paket Tour</a>
+            <a href="#peta" class="block py-2 text-slate-300 hover:text-white">Peta Wilayah</a>
+            <a href="#kontak" class="block py-2 text-slate-300 hover:text-white">Kontak</a>
+            <a href="#kontak"
+                class="block text-center mt-4 w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 text-white font-semibold">Pesan
+                Sekarang</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="hero-bg relative pt-20 pb-32 md:pt-28 md:pb-40 text-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto text-center space-y-6">
+            <div
+                class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 backdrop-blur-md text-indigo-200 text-xs sm:text-sm font-medium">
+                <i class="fa-solid fa-sparkles text-amber-400"></i>
+                <span>Pengalaman Wisata Premium Nusantara</span>
+            </div>
+
+            <h1 class="font-serif-heading text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                Muda Berkelana, Tua bercerita <br class="hidden sm:inline">
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-rose-400">Cihuy</span>
+            </h1>
+
+            <p
+                class="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base md:text-lg font-normal leading-relaxed opacity-90">
+                Dunia terlalu indah untuk dinikmati dengan hanya lewat layar handphone
+            </p>
+
+            <!-- Search Filter Bar (Glassmorphism) -->
+            <div class="pt-6 max-w-4xl mx-auto" id="destinasi">
+                <div
+                    class="glass-panel p-4 rounded-2xl md:rounded-3xl shadow-2xl text-slate-800 grid grid-cols-1 md:grid-cols-4 gap-3 items-center border border-white/40">
+                    <!-- Lokasi Destinasi -->
+                    <div class="text-left px-3 py-2 bg-slate-50/80 rounded-xl border border-slate-200/80">
+                        <label class="block text-[10px] font-bold tracking-wider text-slate-400 uppercase">Lokasi
+                            Destinasi</label>
+                        <select id="filter-location"
+                            class="w-full bg-transparent font-semibold text-slate-700 text-sm focus:outline-none cursor-pointer">
+                            <option value="all">Semua Destinasi</option>
+                            <option value="bali">Bali & Nusa Tenggara</option>
+                            <option value="papua">Papua & Maluku</option>
+                            <option value="jawa">Jawa & Bromo</option>
+                            <option value="sumatra">Sumatra & Komodo</option>
+                        </select>
+                    </div>
+
+                    <!-- Kategori Tour -->
+                    <div class="text-left px-3 py-2 bg-slate-50/80 rounded-xl border border-slate-200/80">
+                        <label
+                            class="block text-[10px] font-bold tracking-wider text-slate-400 uppercase">Kategori</label>
+                        <select id="filter-category"
+                            class="w-full bg-transparent font-semibold text-slate-700 text-sm focus:outline-none cursor-pointer">
+                            <option value="all">Semua Kategori</option>
+                            <option value="alam">Wisata Alam</option>
+                            <option value="bahari">Bahari & Pantai</option>
+                            <option value="budaya">Warisan Budaya</option>
+                            <option value="petualangan">Petualangan</option>
+                        </select>
+                    </div>
+
+                    <!-- Tanggal Keberangkatan -->
+                    <div class="text-left px-3 py-2 bg-slate-50/80 rounded-xl border border-slate-200/80">
+                        <label class="block text-[10px] font-bold tracking-wider text-slate-400 uppercase">Tanggal
+                            Keberangkatan</label>
+                        <input type="date"
+                            class="w-full bg-transparent font-semibold text-slate-700 text-sm focus:outline-none cursor-pointer">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button onclick="handleSearch()"
+                        class="w-full h-full py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Cari Tour</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- STATS BAR - Preserved horizontal layout & spacing -->
+            <div class="pt-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                    <div
+                        class="bg-slate-900/60 backdrop-blur-md border border-slate-700/60 p-3 sm:p-4 rounded-xl text-center">
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400 font-serif-heading">25,000+</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 font-medium">Wisatawan Puas</div>
+                    </div>
+                    <div
+                        class="bg-slate-900/60 backdrop-blur-md border border-slate-700/60 p-3 sm:p-4 rounded-xl text-center">
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400 font-serif-heading">350+</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 font-medium">Destinasi Surga</div>
+                    </div>
+                    <div
+                        class="bg-slate-900/60 backdrop-blur-md border border-slate-700/60 p-3 sm:p-4 rounded-xl text-center">
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400 font-serif-heading">98+</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 font-medium">Mitra Lintas Daerah</div>
+                    </div>
+                    <div
+                        class="bg-slate-900/60 backdrop-blur-md border border-slate-700/60 p-3 sm:p-4 rounded-xl text-center">
+                        <div class="text-xl sm:text-2xl font-bold text-amber-400 font-serif-heading">4.9/5</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 font-medium">Ulasan Bintang 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- PROMO TOUR SPECIAL SECTION (Dark Slate Theme) -->
+    <section id="promo" class="bg-slate-900 text-white py-16 md:py-24 " >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Promo + Countdown -->
+            <div
+                class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-slate-800 pb-8">
+                <div>
+                    <span
+                        class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded-md mb-2 border border-amber-500/30">PROMO
+                        TERBATAS</span>
+                    <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-white">Paket Tour Hemat Spesial
+                        Bulan Ini</h2>
+                    <p class="text-slate-400 text-sm mt-2">Dapatkan potongan harga besar untuk keberangkatan grup dan
+                        penerbangan pilihan.</p>
+                </div>
+                <!-- Countdown Timer -->
+                <div
+                    class="bg-slate-800/90 border border-slate-700/80 px-5 py-3 rounded-2xl flex items-center space-x-4 self-start md:self-auto">
+                    <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Berakhir dalam:</span>
+                    <div class="flex space-x-2 text-center font-bold text-amber-400">
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-700 text-sm"
+                            id="timer-hours">12</div>
+                        <span class="text-slate-500">:</span>
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-700 text-sm"
+                            id="timer-minutes">45</div>
+                        <span class="text-slate-500">:</span>
+                        <div class="bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-700 text-sm"
+                            id="timer-seconds">30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Promo Card 1 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80"
+                                alt="Bali"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 25%</div>
+                            <button onclick="toggleWishlist('promo-1')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 3 Hari 2 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Bali</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Eksplorasi Keindahan Nusa Penida & Bali Selatan</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Jelajahi Pantai Kelingking, Diamond
+                                Beach, dan makan malam romantis di Jimbaran.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 3.200.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 2.450.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Eksplorasi Keindahan Nusa Penida & Bali Selatan', 'Rp 2.450.000', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+
+                <!-- Promo Card 2 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80"
+                                alt="Raja Ampat"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 30%</div>
+                            <button onclick="toggleWishlist('promo-2')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 5 Hari 4 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Papua Barat</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Sailing Cruise Raja Ampat & Lagoon Surga</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Pengalaman menginap di kapal Pinisi
+                                mewah, snorkeling di Wayag dan Pianemo.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 9.800.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 6.800.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Sailing Cruise Raja Ampat & Lagoon Surga', 'Rp 6.800.000', 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+
+                <!-- Promo Card 3 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80"
+                                alt="Bromo"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 20%</div>
+                            <button onclick="toggleWishlist('promo-3')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 2 Hari 1 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Jawa Timur</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Eksplorasi Sunrise Bromo & Kawah Ijen</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Saksikan matahari terbit spektakuler di
+                                Penanjakan dan keajaiban api biru Ijen.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 1.200.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 890.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Eksplorasi Sunrise Bromo & Kawah Ijen', 'Rp 890.000', 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+                <!-- Promo Card 1 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="assets/images/pulaumerah.jpg"
+                                alt="Bali"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 25%</div>
+                            <button onclick="toggleWishlist('promo-1')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 3 Hari 2 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Bali</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Eksplorasi Keindahan Pulau Merah & Sembon</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Jelajahi Pantai Kelingking, Diamond
+                                Beach, dan makan malam romantis di Jimbaran.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 3.200.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 2.450.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Eksplorasi Keindahan Nusa Penida & Bali Selatan', 'Rp 2.450.000', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+
+                <!-- Promo Card 2 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="assets/images/Pulau-Padar-Labuan-Bajo.webp"
+                                alt="Raja Ampat"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 30%</div>
+                            <button onclick="toggleWishlist('promo-2')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 5 Hari 4 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Papua Barat</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Eksplorasi Pulau Padar & Labuan Bajo</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Pengalaman menginap di kapal Pinisi
+                                mewah, snorkeling di Wayag dan Pianemo.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 9.800.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 6.800.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Sailing Cruise Raja Ampat & Lagoon Surga', 'Rp 6.800.000', 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+
+                <!-- Promo Card 3 -->
+                <div
+                    class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700/70 hover:border-indigo-500 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52">
+                            <img src="assets/images/bandung.jpg"
+                                alt="Bromo"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div
+                                class="absolute top-3 left-3 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                                DISKON 20%</div>
+                            <button onclick="toggleWishlist('promo-3')"
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-900/60 backdrop-blur-md text-slate-300 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center text-xs text-slate-400 space-x-3 mb-2">
+                                <span><i class="fa-regular fa-clock text-amber-400 mr-1"></i> 2 Hari 1 Malam</span>
+                                <span>•</span>
+                                <span><i class="fa-solid fa-location-dot text-indigo-400 mr-1"></i> Jawa Timur</span>
+                            </div>
+                            <h3
+                                class="font-serif-heading text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                                Eksplorasi Sunrise Bromo & Kawah Ijen</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">Saksikan matahari terbit spektakuler di
+                                Penanjakan dan keajaiban api biru Ijen.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-slate-700/50 mt-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-500 line-through block">Rp 1.200.000</span>
+                            <span class="text-xl font-bold text-amber-400">Rp 890.000</span>
+                        </div>
+                        <button
+                            onclick="openModal('Eksplorasi Sunrise Bromo & Kawah Ijen', 'Rp 890.000', 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=800&q=80')"
+                            class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">Pesan
+                            Promo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PETA WILAYAH WISATA INTERAKTIF -->
+    <section id="peta" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 space-y-6">
+                <span
+                    class="text-xs font-bold text-indigo-600 tracking-widest uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">PETA
+                    INTERAKTIF</span>
+                <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">Sebaran
+                    Destinasi Wisata Unggulan</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">Indonesia membentang luas dari Sabang sampai Merauke.
+                    Klik pada wilayah di bawah untuk melihat gambaran cepat rute dan destinasi utama kami.</p>
+
+                <div class="space-y-3 pt-2">
+                    <!-- Region Item 1 -->
+                    <div onclick="selectRegion('sumatra')" id="region-sumatra"
+                        class="region-card cursor-pointer p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-500 transition-all flex items-center space-x-4 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Sumatra & Jawa</h4>
+                            <p class="text-xs text-slate-500">Kaya wisata budaya bersejarah & gunung berapi aktif.</p>
+                        </div>
+                    </div>
+
+                    <!-- Region Item 2 -->
+                    <div onclick="selectRegion('bali')" id="region-bali"
+                        class="region-card cursor-pointer p-4 rounded-xl border-2 border-indigo-600 bg-indigo-50/50 transition-all flex items-center space-x-4 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Bali & Nusa Tenggara</h4>
+                            <p class="text-xs text-slate-500">Surga bahari tropis, tempat berselancar, dan resort
+                                eksotis.</p>
+                        </div>
+                    </div>
+
+                    <!-- Region Item 3 -->
+                    <div onclick="selectRegion('papua')" id="region-papua"
+                        class="region-card cursor-pointer p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-500 transition-all flex items-center space-x-4 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Papua & Maluku</h4>
+                            <p class="text-xs text-slate-500">Keanekaragaman hayati bawah laut terbesar di dunia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Map Visualization Container -->
+            <div
+                class="lg:col-span-7 bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-2xl relative overflow-hidden min-h-[380px] flex flex-col justify-between">
+                <div
+                    class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-4 mb-4">
+                    <span class="flex items-center"><i class="fa-solid fa-map text-amber-400 mr-2"></i> Simulator Peta
+                        Ekosistem</span>
+                    <span id="region-tag" class="text-indigo-400 font-bold uppercase tracking-wider">Wilayah: Bali &
+                        NTB</span>
+                </div>
+
+                <!-- Stylized Interactive Map Area -->
+                <div
+                    class="relative w-full h-64 bg-slate-800/60 rounded-2xl border border-slate-700/50 flex items-center justify-center p-4">
+                    <!-- Map Decorative SVG Graphic -->
+                    <svg class="w-full h-full opacity-40 text-slate-500" fill="currentColor" viewBox="0 0 800 400">
+                        <path
+                            d="M150,120 Q180,80 220,110 T300,140 T380,100 T500,160 T650,120 T720,200 T600,280 T450,250 T300,290 T180,220 Z" />
+                        <circle cx="200" cy="150" r="12" class="fill-indigo-500 animate-pulse" />
+                        <circle cx="420" cy="220" r="16" class="fill-amber-400 animate-ping" />
+                        <circle cx="620" cy="180" r="14" class="fill-rose-500 animate-pulse" />
+                    </svg>
+
+                    <!-- Dynamic Map Tooltip Box -->
+                    <div id="map-tooltip"
+                        class="absolute bg-slate-900/95 border border-indigo-500/50 backdrop-blur-md p-4 rounded-xl text-white shadow-2xl max-w-xs transition-all">
+                        <div class="flex items-center space-x-2 text-amber-400 text-xs font-bold mb-1">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="tooltip-title">Rekomendasi Utama</span>
+                        </div>
+                        <p id="tooltip-desc" class="text-xs text-slate-300">Nusa Penida, Labuan Bajo & Taman Nasional
+                            Komodo.</p>
+                        <div
+                            class="mt-3 text-[10px] text-slate-400 flex items-center justify-between border-t border-slate-800 pt-2">
+                            <span>Penerbangan Langsung Tersedia</span>
+                            <span class="text-indigo-400 font-bold">98% Rating Satisfied</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-xs text-slate-500 mt-4">
+                    Klik kategori di samping kiri untuk mengubah sorotan wilayah peta.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI PELANGGAN -->
+    <section class="py-16 bg-slate-100/70 border-y border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+            <span
+                class="text-xs font-bold text-indigo-600 tracking-widest uppercase bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">ULASAN
+                WISATAWAN</span>
+            <h2 class="font-serif-heading text-3xl font-bold text-slate-900">Pengalaman Mereka Bersama NusantaraX</h2>
+
+            <!-- Testimonial Card Display -->
+            <div id="testimonial-container"
+                class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl max-w-3xl mx-auto relative transition-all duration-300">
+                <div class="text-amber-400 text-xl space-x-1 mb-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p id="testi-text"
+                    class="text-slate-700 text-base sm:text-lg italic font-serif-heading leading-relaxed">
+                    "perjalanan ku bersama teman teman sangat menyenangkan, bahkan kami membuat konten day in my life juga."
+                </p>
+                <div class="mt-6 flex items-center justify-center space-x-3">
+                    <img id="testi-avatar" src="assets/images/webcam-toy-photo27.jpg" alt="Avatar"
+                        class="w-12 h-12 rounded-full object-cover border-2 border-indigo-500">
+                    <div class="text-left">
+                        <h4 id="testi-name" class="font-bold text-slate-900 text-sm">Ardan Naufal Firdaus</h4>
+                        <p id="testi-role" class="text-xs text-slate-500">Wisatawan asal Jakarta</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center justify-center space-x-4">
+                <button onclick="prevTestimonial()"
+                    class="w-10 h-10 rounded-full bg-white border border-slate-300 text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextTestimonial()"
+                    class="w-10 h-10 rounded-full bg-white border border-slate-300 text-slate-700 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK & FORM PERTANYAAN -->
+    <section id="kontak" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Info Kontak -->
+            <div class="lg:col-span-5 space-y-6">
+                <span
+                    class="text-xs font-bold text-indigo-600 tracking-widest uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">HUBUNGI
+                    KAMI</span>
+                <h2 class="font-serif-heading text-3xl sm:text-4xl font-bold text-slate-900">Punya Pertanyaan Khusus
+                    Mengenai Rencana Liburan Anda?</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">Tim konsultan perjalanan kami siap membantu menyusun
+                    paket khusus kustomisasi sesuai kebutuhan Anda 24/7.</p>
+
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 font-bold">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs text-slate-400 font-semibold uppercase">Email Resmi</h5>
+                            <p class="text-sm font-bold text-slate-800">info@nusantaratravel.id</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 font-bold">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs text-slate-400 font-semibold uppercase">Layanan Hotline</h5>
+                            <p class="text-sm font-bold text-slate-800">+62 895-3704-19889</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Pertanyaan -->
+            <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
+                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <h3 class="font-serif-heading text-xl font-bold text-slate-900 mb-4">Kirim Pesan Langsung</h3>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap Anda :</label>
+                        <input type="text" required placeholder="Masukkan nama Anda"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Email Anda :</label>
+                        <input type="email" required placeholder="email@domain.com"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Pesan atau Pertanyaan yang ingin Anda
+                            ajukan :</label>
+                        <textarea rows="4" required placeholder="Tuliskan pertanyaan atau rencana perjalanan Anda..."
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all">
+                        Kirim Pertanyaan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Dark Slate Theme) -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">
+                            N</div>
+                        <span class="font-serif-heading text-xl font-bold text-white">Nusantara<span
+                                class="text-amber-400">X</span></span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Platform pemesanan tur dan pengalaman pariwisata
+                        terbaik terpercaya di Indonesia.</p>
+                    <div class="flex space-x-3 text-slate-400 pt-2">
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-amber-400 hover:border-amber-400 transition-all"><i
+                                class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-amber-400 hover:border-amber-400 transition-all"><i
+                                class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-amber-400 hover:border-amber-400 transition-all"><i
+                                class="fa-brands fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4">Navigasi</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#beranda" class="hover:text-amber-400 transition-colors">Beranda</a></li>
+                        <li><a href="#destinasi" class="hover:text-amber-400 transition-colors">Destinasi</a></li>
+                        <li><a href="#promo" class="hover:text-amber-400 transition-colors">Paket Promo</a></li>
+                        <li><a href="#peta" class="hover:text-amber-400 transition-colors">Peta Wisata</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4">Kategori</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Wisata Bahari</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Pegunungan</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Seni & Budaya</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Kuliner Khas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4">Langganan Inforomasi Promo</h4>
+                    <p class="text-xs mb-3 text-slate-400">Jangan terlewatkan dan dapatkan kabar tpur promo terbaru
+                        langsung di email Anda.</p>
+                    <form
+                        onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan newsletter NusantaraX!');"
+                        class="flex gap-2">
+                        <input type="email" required placeholder="Email Anda..."
+                            class="bg-slate-900 border border-slate-800 text-xs text-white px-3 py-2 rounded-lg focus:outline-none focus:border-indigo-500 w-full">
+                        <button type="submit"
+                            class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-2 rounded-lg text-xs transition-all">Daftar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-slate-500">
+                &copy; 2026 NusantaraX Indonesia. Seluruh Hak Cipta Dilindungi Undang-Undang.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL PEMESANAN TOUR -->
+    <div id="booking-modal"
+        class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div
+            class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-100 transition-all">
+            <div class="relative h-44">
+                <img id="modal-img" src="" alt="Tour" class="w-full h-full object-cover">
+                <button onclick="closeModal()"
+                    class="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-900/60 text-white flex items-center justify-center hover:bg-slate-900">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <h3 id="modal-title" class="font-serif-heading text-xl font-bold text-slate-900">Nama Paket Tour</h3>
+                <p id="modal-price" class="text-indigo-600 font-bold text-lg mt-1">Rp 0</p>
+
+                <div class="mt-4 space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Tanggal Keberangkatan</label>
+                        <input type="date"
+                            class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-indigo-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Jumlah Peserta</label>
+                        <input type="number" min="1" value="1"
+                            class="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-indigo-600">
+                    </div>
+                </div>
+
+                <div class="mt-6 flex space-x-3">
+                    <button onclick="closeModal()"
+                        class="w-1/2 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-bold hover:bg-slate-50">Batal</button>
+                    <button onclick="confirmBooking()"
+                        class="w-1/2 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md">Konfirmasi
+                        Pesanan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL WISHLIST FAVORIT -->
+    <div id="wishlist-modal"
+        class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeWishlistModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-serif-heading text-xl font-bold text-slate-900 mb-4 flex items-center">
+                <i class="fa-solid fa-heart text-rose-500 mr-2"></i> Destinasi Favorit Saya
+            </h3>
+            <div id="wishlist-list" class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar text-xs text-slate-600">
+                <p class="text-center py-6 text-slate-400">Belum ada destinasi favorit yang disimpan.</p>
+            </div>
+            <button onclick="closeWishlistModal()"
+                class="w-full mt-4 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl">Tutup</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+
+        let currentTestiIndex = 0;
+        let wishlist = [];
+
+        // Render Cards Destinasi
+        function renderDestinations(items) {
+            const grid = document.getElementById('destination-grid');
+            grid.innerHTML = '';
+
+            items.forEach(item => {
+                const isFav = wishlist.includes(item.id);
+                const card = `
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden h-52">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute top-3 left-3 bg-slate-900/70 backdrop-blur-md text-white text-[11px] font-semibold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> ${item.location}
+                                </div>
+                                <button onclick="toggleWishlist('${item.id}')" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 backdrop-blur-md text-slate-600 hover:text-rose-500 flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-heart ${isFav ? 'text-rose-500' : ''}"></i>
+                                </button>
+                            </div>
+                            <div class="p-5">
+                                <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                                    <span class="capitalize text-indigo-600 font-bold bg-indigo-50 px-2.5 py-0.5 rounded-md border border-indigo-100">${item.category}</span>
+                                    <span class="flex items-center text-amber-500 font-bold"><i class="fa-solid fa-star mr-1"></i> ${item.rating}</span>
+                                </div>
+                                <h3 class="font-serif-heading text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">${item.title}</h3>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0 border-t border-slate-100 mt-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Mulai dari</span>
+                                <span class="text-lg font-bold text-indigo-600">${item.price}</span>
+                            </div>
+                            <button onclick="openModal('${item.title}', '${item.price}', '${item.image}')" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold transition-all">Detail Tour</button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Filter Kategori
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-white', 'text-slate-600');
+            event.target.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+
+            if (cat === 'all') {
+                renderDestinations(destinations);
+            } else {
+                const filtered = destinations.filter(d => d.category === cat);
+                renderDestinations(filtered);
+            }
+        }
+
+        // Peta Interaktif Region Switcher
+        function selectRegion(region) {
+            document.querySelectorAll('.region-card').forEach(card => {
+                card.classList.remove('border-2', 'border-indigo-600', 'bg-indigo-50/50');
+                card.classList.add('border-slate-200', 'bg-white');
+            });
+
+            const activeCard = document.getElementById(`region-${region}`);
+            if (activeCard) {
+                activeCard.classList.remove('border-slate-200', 'bg-white');
+                activeCard.classList.add('border-2', 'border-indigo-600', 'bg-indigo-50/50');
+            }
+
+            const tag = document.getElementById('region-tag');
+            const title = document.getElementById('tooltip-title');
+            const desc = document.getElementById('tooltip-desc');
+
+            if (region === 'sumatra') {
+                tag.innerText = 'Wilayah: Sumatra & Jawa';
+                title.innerText = 'Sorotan Sumatra & Jawa';
+                desc.innerText = 'Candi Borobudur, Danau Toba, & Gunung Bromo.';
+            } else if (region === 'bali') {
+                tag.innerText = 'Wilayah: Bali & NTB';
+                title.innerText = 'Sorotan Bali & NTB';
+                desc.innerText = 'Nusa Penida, Labuan Bajo & Taman Nasional Komodo.';
+            } else if (region === 'papua') {
+                tag.innerText = 'Wilayah: Papua & Maluku';
+                title.innerText = 'Sorotan Papua & Maluku';
+                desc.innerText = 'Kepulauan Raja Ampat, Banda Neira & Pantai Ora.';
+            }
+        }
+
+        // Testimonial Controls
+        function updateTestimonial() {
+            const data = testimonials[currentTestiIndex];
+            document.getElementById('testi-text').innerText = data.text;
+            document.getElementById('testi-name').innerText = data.name;
+            document.getElementById('testi-role').innerText = data.role;
+            document.getElementById('testi-avatar').src = data.avatar;
+        }
+
+        function nextTestimonial() {
+            currentTestiIndex = (currentTestiIndex + 1) % testimonials.length;
+            updateTestimonial();
+        }
+
+        function prevTestimonial() {
+            currentTestiIndex = (currentTestiIndex - 1 + testimonials.length) % testimonials.length;
+            updateTestimonial();
+        }
+
+        // Wishlist Modal & Toggle
+        function toggleWishlist(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+            } else {
+                wishlist.push(id);
+            }
+            updateWishlistUI();
+            renderDestinations(destinations);
+        }
+
+        function updateWishlistUI() {
+            const badge = document.getElementById('wishlist-badge');
+            if (wishlist.length > 0) {
+                badge.classList.remove('hidden');
+                badge.innerText = wishlist.length;
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function openWishlistModal() {
+            const listContainer = document.getElementById('wishlist-list');
+            listContainer.innerHTML = '';
+
+            if (wishlist.length === 0) {
+                listContainer.innerHTML = '<p class="text-center py-6 text-slate-400">Belum ada destinasi favorit yang disimpan.</p>';
+            } else {
+                wishlist.forEach(id => {
+                    const item = destinations.find(d => d.id === id) || { title: 'Paket Promo Favorit', price: 'Promo' };
+                    listContainer.innerHTML += `
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-slate-800">${item.title}</span>
+                            <button onclick="toggleWishlist('${id}'); openWishlistModal();" class="text-rose-500 font-bold hover:underline">Hapus</button>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('wishlist-modal').classList.remove('hidden');
+        }
+
+        function closeWishlistModal() {
+            document.getElementById('wishlist-modal').classList.add('hidden');
+        }
+
+        // Modal Pemesanan Tour
+        function openModal(title, price, img) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-img').src = img;
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function confirmBooking() {
+            alert('Terima kasih! Pemesanan Anda telah diterima. Tim kami akan menghubungi Anda melalui email/WhatsApp.');
+            closeModal();
+        }
+
+        // Form Submit Kontak
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Pesan Anda berhasil terkirim. Tim konsultan kami akan membalas segera!');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Search Handler
+        function handleSearch() {
+            alert('Mencari jadwal tour berdasarkan filter yang dipilih...');
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Countdown Timer Logic
+        let totalSeconds = 12 * 3600 + 45 * 60 + 30;
+        setInterval(() => {
+            if (totalSeconds > 0) {
+                totalSeconds--;
+                const hrs = Math.floor(totalSeconds / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
+
+                document.getElementById('timer-hours').innerText = String(hrs).padStart(2, '0');
+                document.getElementById('timer-minutes').innerText = String(mins).padStart(2, '0');
+                document.getElementById('timer-seconds').innerText = String(secs).padStart(2, '0');
+            }
+        }, 1000);
+
+        // Init App on Window Load
+        window.onload = function () {
+            renderDestinations(destinations);
+        };
+    </script>
+</body>
+
+</html>
